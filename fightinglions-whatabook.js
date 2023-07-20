@@ -216,6 +216,10 @@ db.customers.insertOne(customer_four)
 db.customers.insertOne(customer_five)
 db.customers.insertOne(customer_six)
 
+/**
+ * Books Database Commands
+ */
+
 //Displays all books in the collection
 db.books.find({ })
 
@@ -227,3 +231,23 @@ db.books.find({ "author": "Alexander Dumas" })
 
 //Displays book by a specific Book ID
 db.books.findOne({ "bookId": 1104 })
+
+/**
+ * Customer Database Commands
+ */
+
+// Display wishlist by customerId
+db.customers.aggregate([
+    { 
+        $project : 
+        {
+            customerId: 1, 
+            wishlists: 1
+        }
+    },
+    {
+        $match: {
+            customerId: 1003
+        }
+    }    
+])
