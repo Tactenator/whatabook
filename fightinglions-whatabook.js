@@ -251,3 +251,28 @@ db.customers.aggregate([
         }
     }    
 ])
+
+// Adds a book to a customer's wish list
+db.customers.updateOne(
+    { "customerId": 1003 },
+    { "$addToSet": {
+        wishlists: {
+            "bookId": 1103,
+            "name": "Gone With the Wind",
+            "genre": "historical fiction",
+            "author": "Margaret Mitchell"
+        }
+    }}
+)
+
+// Removes a book from a customers wishlist
+db.customers.updateOne(
+    { "customerId": 1003 },
+    { "$pull": {
+        wishlists: { 
+            "bookId": { 
+                $eq: 1103 
+            } 
+        }
+    }
+})
