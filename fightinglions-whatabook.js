@@ -5,6 +5,10 @@
  * Description: MongoDB Shell Scripts for the whatabook collection
  */
 
+//Loads the file for use
+load('fightinglions-whatabook.js');
+
+
 // Cleaning up the collection first
 
 db.books.deleteOne({ "bookId": 1100 })
