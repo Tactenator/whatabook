@@ -2,6 +2,9 @@
 # 7/19/2023
 # McLaurine_console.py
 # Web 335 - Assignment 9.2
+# Contributors:
+# Trevor McLaurine
+# Patrick Cuauro
 
 # Importing MongoClient from pymongo
 import pymongo
@@ -17,9 +20,9 @@ print("Connecting to MongoDB....\n")
 
 # Connection string to connect to MongoDB. Certifi fixes certification issues
 client = pymongo.MongoClient(
-    # "mongodb+srv://web335_user:s3cret@web340db.93lxfky.mongodb.net/?retryWrites=true&w=majority", tlsCAFile=certifi.where()
+    "mongodb+srv://web335_user:s3cret@web340db.93lxfky.mongodb.net/?retryWrites=true&w=majority", tlsCAFile=certifi.where()
     # Trevor's Database connection string
-    "mongodb+srv://web335_user:s3cret@bellevueuniversity.5jww2it.mongodb.net/?retryWrites=true&w=majority", tlsCAFile=certifi.where()
+    # "mongodb+srv://web335_user:s3cret@bellevueuniversity.5jww2it.mongodb.net/?retryWrites=true&w=majority", tlsCAFile=certifi.where()
     # Patrick's Database connection string
 )
 
@@ -27,9 +30,9 @@ if (client):
     print("Success!\n")
 
 # connect to web335DB
-# db = client['web335DB']
+db = client['web335DB']
 # connect to Patricks DB
-db = client['Whatabook']
+# db = client['Whatabook']
 
 print("Connecting to database...\n")
 
@@ -96,11 +99,11 @@ while (run_app):
         customer_input = input(
             "Please input the customer ID of the wishlist you wish to see: ")
         # included by Patrick
-        # retrieve an object from the database using the code 1003 because it is the only one that has a wishlist more than two items
-        # customer_found = (db.customers.find_one(
-        #     # the customer ID is an integer, so it must be converted to an integer
-        #     {'customerId': int(customer_input)}
-        # ))
+        # retrieve an object from the database using the code 1001 because it is the only one that has a wishlist more than two items
+        customer_found = (db.customers.find_one(
+            # the customer ID is an integer, so it must be converted to an integer
+            {'customerId': int(customer_input)}
+        ))
         # this functions only retrieves the keys in the object in this case should be the customer ID, first name, last name, and wishlist
         # for wishlist in customer_found:
         #     print(wishlist)
@@ -109,17 +112,14 @@ while (run_app):
         customer_wishlist = db.customers.find_one(
             {'customerId': int(customer_input)})
         # then retrieve the array of books from the document
-        selected_books = customer_wishlist[selected_books]
-        # then print the array of books
+        selected_books = customer_wishlist["wishlists"]
         for book in selected_books:
-            print(book)
-        print("nnnnnn")
-        print("nnnnnn")
-        # for document in customer_found:
-        #     print("Customer ID: " + str(document.get('customerId')))
-        #     print("First Name: " + str(document.get('firstName')))
-        #     print("Last Name: " + str(document.get('lastName')))
-        #     print("Wishlist: " + str(document.get('wishlist')))
+            print("\n ******************************************************* \n")
+            print("Book ID: " + str(book.get("bookId")))
+            print("Title: " + str(book.get("title")))
+            print("Author: " + str(book.get("author")))
+            print("Genre: " + str(book.get("genre")))
+            print("\n ******************************************************* \n")
         # end of included by Patrick
         # included by Patrick
     elif (user_input == "customers"):
