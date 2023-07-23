@@ -17,7 +17,7 @@ db.createCollection('books', {
         required: ['bookId', 'title', 'genre', 'author'],
         properties: {
           bookId: {
-            bsonType: 'string',
+            bsonType: 'number',
           },
           title: {
             bsonType: 'string',
@@ -41,7 +41,7 @@ db.createCollection('books', {
         required: ['customerId', 'firstName', 'lastName', 'wishlists'],
         properties: {
           customerId: {
-            bsonType: 'string',
+            bsonType: 'number',
           },
           firstName: {
             bsonType: 'string',
@@ -102,9 +102,9 @@ customer_two = {
 
 customer_three = {
     "customerId":1002,
-    "firstName":"Patrick",
-    "lastName":"Cuauro",
-    "username":"patrickcuauro",
+    "firstName":"Mary",
+    "lastName":"Shelly",
+    "username":"maryshell",
     "wishlists":[
         {
             "bookId": 1101,
